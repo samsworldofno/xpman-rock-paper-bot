@@ -1,3 +1,3 @@
 require './rock_paper'
 
-RockPaper.run!
+run RockPaper
