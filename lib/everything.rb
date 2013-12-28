@@ -90,17 +90,15 @@ class DB
 
   def db
     @connection ||= begin
-      details = {}
-
       if uri
-        details = {
+        Redis::Namespace.new(:rock_paper, 
           host: uri.host,
           port: uri.port,
           password: uri.password
-        }
+        )
+      else
+        Redis::Namespace.new(:rock_paper)
       end
-      
-      Redis::Namespace.new(:rock_paper, details)
     end
   end
 
