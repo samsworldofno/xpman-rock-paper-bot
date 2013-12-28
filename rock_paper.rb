@@ -5,7 +5,7 @@ class RockPaper < Sinatra::Base
   end
 
   get '/move' do
-    'ROCK'
+    ['ROCK', 'PAPER', 'SCISSORS'].sample
   end
 
   post '/move' do
