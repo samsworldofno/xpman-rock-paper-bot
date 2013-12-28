@@ -1,3 +1,3 @@
-require './rock_paper'
+require './server'
 
-run RockPaper
+run RockPaper::Server
