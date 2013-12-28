@@ -81,10 +81,29 @@ end
 require 'redis'
 require 'redis-namespace'
 
+
 class DB
   include Singleton
 
   def db
-    @connection ||= Redis::Namespace.new(:rock_paper)
+    @connection ||= begin
+      details = {}
+
+      if uri
+        details = {
+          host: uri.host,
+          port: uri.port,
+          password: uri.password
+        }
+      end
+      
+      Redis::Namespace.new(:rock_paper, details)
+    end
+  end
+
+  private
+
+  def uri
+    URI.parse(ENV["REDISCLOUD_URL"]) if ENV["REDISCLOUD_URL"]
   end
 end
