@@ -5,8 +5,6 @@ require_relative './lib/everything'
 
 module RockPaper
   class Server < Sinatra::Base
-    enable :sessions
-
     get '/status' do
       "<xmp>#{MatchManager.instance.current.inspect}</xmp>"
     end
