@@ -14,6 +14,8 @@ class MatchManager
   def create(opts)
     match = build(opts)
 
+    binding.pry
+
     dao.create(
       opponent_name: match.opponent_name,
       points_to_win: match.points_to_win,
@@ -80,6 +82,7 @@ end
 
 require 'redis'
 require 'redis-namespace'
+require 'uri'
 
 
 class DB
