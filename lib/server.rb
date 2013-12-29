@@ -17,24 +17,36 @@ class Server < Sinatra::Base
   end
 
   post '/start' do
-    actors[:match_creator].call({
+    attrs = {
       opponent_name: params["opponentName"],
       points_to_win: params["pointsToWin"].to_i,
       max_rounds: params["maxRounds"].to_i,
       dynamite_count: params["dynamiteCount"].to_i
-    })
+    }
+
+    logger.info("POST /start: #{attrs.inspect}")
+
+    actors[:match_creator].call(attrs)
   end
 
   post '/move' do
     current_game_id = actors[:match_get_current].call().id
 
-    actors[:move_creator].call({
+    attrs = {
       opponent_move: params["lastOpponentMove"],
       game_id: current_game_id
-    })
+    }
+
+    logger.info("POST /move: #{attrs.inspect}")
+
+    actors[:move_creator].call(attrs)
   end
 
   get '/move' do
-    ['ROCK', 'PAPER', 'SCISSORS'].sample
+    move = ['ROCK', 'PAPER', 'SCISSORS'].sample
+
+    logger.info("GET /move: #{move}")
+
+    move
   end
 end
