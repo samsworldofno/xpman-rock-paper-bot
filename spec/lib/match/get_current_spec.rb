@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 require_relative '../../../lib/match/get_current'
 
 describe Match::GetCurrent do

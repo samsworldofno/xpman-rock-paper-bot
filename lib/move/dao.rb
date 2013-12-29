@@ -1,3 +1,5 @@
+require_relative '../../lib/dao'
+
 class Move
   class Dao < Dao
     def create(attrs)

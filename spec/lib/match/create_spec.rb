@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 require_relative '../../../lib/match/create'
 
 describe Match::Create do
