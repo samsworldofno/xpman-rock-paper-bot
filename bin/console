@@ -2,6 +2,7 @@
 
 require 'pry'
 
-# require_relative '../lib/everything'
+require_relative '../lib/rock_paper'
+require_relative '../lib/rock_paper/initializers'
 
 binding.pry

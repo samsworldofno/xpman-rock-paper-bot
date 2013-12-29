@@ -1,25 +1,7 @@
+require_relative './rock_paper'
+require_relative './rock_paper/initializers'
+
 require 'sinatra/base'
-
-require_relative './redis_connection'
-
-require_relative './match/create'
-require_relative './match/get_current'
-require_relative './match/dao'
-
-require_relative './move/create'
-require_relative './move/dao'
-
-def redis_connection
-  @redis_connection ||= RedisConnection.new.db
-end
-
-def match_dao
-  @match_dao ||= Match::Dao.new(db: redis_connection)
-end
-
-def move_dao
-  @move_dao ||= Move::Dao.new(db: redis_connection)
-end
 
 class Server < Sinatra::Base
   set :actors, {
@@ -48,5 +30,9 @@ class Server < Sinatra::Base
       opponent_move: params["opponentMove"],
       game_id: current_game_id
     })
+  end
+
+  get '/move' do
+    ['ROCK', 'PAPER', 'SCISSORS'].sample
   end
 end
