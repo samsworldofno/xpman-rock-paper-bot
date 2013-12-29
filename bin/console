@@ -2,6 +2,6 @@
 
 require 'pry'
 
-require_relative '../lib/everything'
+# require_relative '../lib/everything'
 
 binding.pry

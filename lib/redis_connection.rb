@@ -1,11 +1,8 @@
-require 'singleton'
 require 'redis'
 require 'redis-namespace'
 require 'uri'
 
 class RedisConnection
-  include Singleton
-
   def db
     @connection ||= begin
       redis = if uri
