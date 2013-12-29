@@ -4,7 +4,7 @@ require_relative './rock_paper/initializers'
 require 'sinatra/base'
 
 class Server < Sinatra::Base
-  enable :logging
+  set :logging, true
 
   set :actors, {
     match_creator: Match::Create.new(dao: match_dao),
