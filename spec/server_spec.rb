@@ -57,7 +57,7 @@ describe Server do
       })
 
       post '/move', {
-        'opponentMove' => 'PAPER'
+        'lastOpponentMove' => 'PAPER'
       }
     end
   end

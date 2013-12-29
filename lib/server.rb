@@ -4,6 +4,8 @@ require_relative './rock_paper/initializers'
 require 'sinatra/base'
 
 class Server < Sinatra::Base
+  enable :logging
+
   set :actors, {
     match_creator: Match::Create.new(dao: match_dao),
     match_get_current: Match::GetCurrent.new(dao: match_dao),
@@ -27,7 +29,7 @@ class Server < Sinatra::Base
     current_game_id = actors[:match_get_current].call().id
 
     actors[:move_creator].call({
-      opponent_move: params["opponentMove"],
+      opponent_move: params["lastOpponentMove"],
       game_id: current_game_id
     })
   end
