@@ -36,17 +36,17 @@ describe Move::Chooser::Decision do
     context 'there is no popular move' do
       let(:previous_moves) { %w{ PAPER SCISSORS ROCK } }
 
-      context 'dice roll is 1 or 2' do
+      context 'dice roll is 1' do
         before do
-          decision.stub(dice_roll: rand(1) + 1)
+          decision.stub(dice_roll: 1)
         end
 
         it { should == 'DYNAMITE' }
       end
 
-      context 'dice roll is 3' do
+      context 'dice roll is 3 or 4' do
         before do
-          decision.stub(dice_roll: 3)
+          decision.stub(dice_roll: rand(2) + 3)
         end 
 
         it "choses the opponent's last move" do

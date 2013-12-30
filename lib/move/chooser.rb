@@ -27,9 +27,9 @@ class Move
           'DYNAMITE'
         elsif very_popular_move? && coin_flip == :heads
           WINNERS[very_popular_move]
-        elsif dice_roll == 1 || dice_roll == 2
+        elsif dice_roll == 1
           'DYNAMITE'
-        elsif dice_roll == 3
+        elsif dice_roll == 3 || dice_roll == 4
           opponents_last_move
         else
           %w{DYNAMITE SCISSORS PAPER ROCK}.sample
@@ -43,7 +43,7 @@ class Move
       end
 
       def dice_roll
-        @dice_roll ||= rand(4) + 1
+        @dice_roll ||= rand(6) + 1
       end
 
       def first_move?
