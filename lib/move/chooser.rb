@@ -39,7 +39,7 @@ class Move
       private
 
       def coin_flip
-        @coin_flip ||= rand(1) ? :heads : :tails
+        @coin_flip ||= rand(2) == 1 ? :heads : :tails
       end
 
       def dice_roll
