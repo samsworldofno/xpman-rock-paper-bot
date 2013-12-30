@@ -49,8 +49,8 @@ describe Move::Chooser::Decision do
           decision.stub(dice_roll: rand(2) + 3)
         end 
 
-        it "choses the opponent's last move" do
-          result.should == 'ROCK'
+        it "choses the opponent's second-to-last move" do
+          result.should == 'SCISSORS'
         end
       end
 

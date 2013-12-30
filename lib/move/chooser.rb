@@ -72,7 +72,7 @@ class Move
       end
 
       def opponents_last_move
-        previous_moves.last
+        previous_moves[-2]
       end
     end
   end
