@@ -10,11 +10,11 @@ describe Move::Create do
       subject(:move) do
         creator.call({
           opponent_move: 'PAPER',
-          game_id: 11
+          match_id: 11
         })
       end
 
-      its(:game_id)         { should == 11 }
+      its(:match_id)        { should == 11 }
       its(:opponent_move)   { should == 'PAPER' }
     end
 

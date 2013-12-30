@@ -9,11 +9,17 @@ class Server < Sinatra::Base
   set :actors, {
     match_creator: Match::Create.new(dao: match_dao),
     match_get_current: Match::GetCurrent.new(dao: match_dao),
-    move_creator: Move::Create.new(dao: move_dao)
+    move_creator: Move::Create.new(dao: move_dao),
+    move_historian: Move::Historian.new(dao: move_dao),
+    move_chooser: Move::Chooser.new(dao: move_dao)
   }
 
   def actors
     settings.actors
+  end
+
+  def current_game_id
+    actors[:match_get_current].call().id
   end
 
   post '/start' do
@@ -30,11 +36,9 @@ class Server < Sinatra::Base
   end
 
   post '/move' do
-    current_game_id = actors[:match_get_current].call().id
-
     attrs = {
       opponent_move: params["lastOpponentMove"],
-      game_id: current_game_id
+      match_id: current_game_id
     }
 
     logger.info("POST /move: #{attrs.inspect}")
@@ -43,7 +47,11 @@ class Server < Sinatra::Base
   end
 
   get '/move' do
-    move = ['ROCK', 'PAPER', 'SCISSORS'].sample
+    previous_moves = actors[:move_historian].call(
+      match_id: current_game_id
+    )
+
+    move = actors[:move_chooser].call(previous_moves: previous_moves)
 
     logger.info("GET /move: #{move}")
 

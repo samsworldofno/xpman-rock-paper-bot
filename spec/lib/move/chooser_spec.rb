@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 require_relative '../../../lib/move/chooser'
 
 describe Move::Chooser::Decision do

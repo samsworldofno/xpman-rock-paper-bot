@@ -1,3 +1,3 @@
 class Move
-  attr_accessor :game_id, :opponent_move
+  attr_accessor :match_id, :opponent_move
 end

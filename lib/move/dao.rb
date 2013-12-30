@@ -3,7 +3,17 @@ require_relative '../../lib/dao'
 class Move
   class Dao < Dao
     def create(attrs)
-      db.lpush("matches:#{attrs[:game_id]}:moves", attrs[:opponent_move])
+      db.lpush(match_key(attrs[:match_id]), attrs[:opponent_move])
+    end
+
+    def for_match(match_id:)
+      db.lrange(match_key(match_id), 0, -1)
+    end
+
+    private
+
+    def match_key(match_id)
+      "matches:#{match_id}:moves"
     end
   end
 end

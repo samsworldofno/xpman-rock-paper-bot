@@ -1,5 +1,7 @@
+require_relative '../action'
+
 class Move
-  class Chooser
+  class Chooser < Action
     def call(previous_moves:)
       Decision.new(previous_moves: previous_moves).call
     end

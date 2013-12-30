@@ -6,3 +6,5 @@ require_relative './match/dao'
 
 require_relative './move/create'
 require_relative './move/dao'
+require_relative './move/historian'
+require_relative './move/chooser'

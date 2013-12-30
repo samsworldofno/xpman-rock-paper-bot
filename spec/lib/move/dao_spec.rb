@@ -12,9 +12,17 @@ describe Move::Dao do
       expect(db).to receive(:lpush).with("matches:11:moves", 'PAPER')
 
       dao.create({
-        game_id: 11,
+        match_id: 11,
         opponent_move: 'PAPER'
       })
+    end
+  end
+
+  describe '#for_match' do
+    it 'retrieves the moves for the given match' do
+      expect(db).to receive(:lrange).with("matches:11:moves", 0, -1)
+
+      dao.for_match(match_id: 11)
     end
   end
 end
