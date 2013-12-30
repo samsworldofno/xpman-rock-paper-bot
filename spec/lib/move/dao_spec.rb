@@ -20,9 +20,15 @@ describe Move::Dao do
 
   describe '#for_match' do
     it 'retrieves the moves for the given match' do
-      expect(db).to receive(:lrange).with("matches:11:moves", 0, -1)
+      expect(db).to receive(:lrange).with("matches:11:moves", 0, -1).and_return("")
 
       dao.for_match(match_id: 11)
+    end
+
+    it 'returns an array, most recent move first' do
+      db.stub(lrange: %{ROCK PAPER SCISSORS})
+
+      dao.for_match(match_id: 11).should eq(['SCISSORS', 'PAPER', 'ROCK'])
     end
   end
 end
