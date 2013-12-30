@@ -7,7 +7,7 @@ class Move
     end
 
     def for_match(match_id:)
-      db.lrange(match_key(match_id), 0, -1).split(" ").reverse
+      db.lrange(match_key(match_id), 0, -1).reverse
     end
 
     private
